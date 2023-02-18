@@ -73,7 +73,7 @@ def board_to_svg(
     Args:
         board (chess.Board): chess board
         orientation (chess.Color): board orientation
-        lastmove (Optional[chess.Move], optional): last move to highlight on board. defaults to None.
+        last_move (Optional[chess.Move], optional): last move to highlight on board. defaults to None.
         size (int, optional): size of board in svg. defaults to 400.
         coordinates (bool, optional): add board coordinates to svg. defaults to True.
         style (Optional[str], optional): style css for svg. defaults to None.
