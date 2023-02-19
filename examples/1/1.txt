@@ -1,1 +1,0 @@
-pgn-to-gif --pgn 1.pgn --gif 1.gif

@@ -3,11 +3,11 @@ from io import StringIO
 from multiprocessing import Pool
 from pathlib import Path
 from tempfile import TemporaryFile
-import cairosvg
 import chess
 import chess.pgn
 import chess.svg
 import imageio
+import wand.image
 
 
 def read_file(path: Union[Path, str]) -> str:
@@ -105,7 +105,9 @@ def svg_to_png(
     Returns:
         bytes: board png
     """
-    return cairosvg.svg2png(bytestring=board_svg)
+    with wand.image.Image(blob=bytes(board_svg, encoding='utf-8'), format="svg") as image:
+        png_image = image.make_blob("png")
+        return png_image
 
 
 def pngs_to_gif(
@@ -250,7 +252,7 @@ def pgn_to_gif(
     coordinates: bool = True,
     style: Optional[str] = None,
     loop: int = 0,
-    duration: Optional[float] = None,
+    duration: Optional[float] = 1.0,
     fps: Optional[float] = 1.0,
     palettesize: int = 16,
     subrectangles: bool = True,
